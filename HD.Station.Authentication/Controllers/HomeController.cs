@@ -28,7 +28,7 @@ namespace HD.Station.Authentication.Controllers
             return View("Secret");
         }
         // role base
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles  = "Admin")]
         public IActionResult SecretRole()
         {
             return View(); 
