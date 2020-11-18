@@ -20,12 +20,28 @@ namespace HD.Station.Authentication.Controllers
         {
             return View();
         }
+
+        // claim base
+        [Authorize(Policy = "Claim.Dob")]
+        public IActionResult SecretPolicy()
+        {
+            return View("Secret");
+        }
+        // role base
+        [Authorize(Roles = "Admin")]
+        public IActionResult SecretRole()
+        {
+            return View(); 
+        }
         public IActionResult Authenticate()
         {
             var grandmaClaims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Name , "Bob"),
                 new Claim (ClaimTypes.Email , "bob@gmail.com"),
+                new Claim (ClaimTypes.DateOfBirth , "12/02/2020"),
+                new Claim (ClaimTypes.Role , "Admin"),
+
                 new Claim("Granma","Very nice boi")
             };
             var licenciClaims = new List<Claim>()

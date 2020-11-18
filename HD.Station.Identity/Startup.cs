@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HD.Station.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -25,6 +26,8 @@ namespace HD.Station.Identity
 
             // AddIdentity Registers the services
             services.AddIdentity<IdentityUser, IdentityRole>(config => {
+                // config password input
+
                 config.Password.RequiredLength = 4;
                 config.Password.RequireDigit = false;
                 config.Password.RequireNonAlphanumeric = false;
@@ -35,6 +38,7 @@ namespace HD.Station.Identity
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
             //-------------------------------------------------------------------------
+
             services.ConfigureApplicationCookie(config =>
             {
                 config.Cookie.Name = "Identity.Cookie";
@@ -42,12 +46,7 @@ namespace HD.Station.Identity
             });
 
             //-------------------------------------------------------------------------
-            //services.AddAuthentication("CookieAuth")
-            //    .AddCookie("CookieAuth", config =>
-            //    {
-            //        config.Cookie.Name = "Grandma.Cookie";
-            //        config.LoginPath = "/Home/Authenticate";
-            //    });
+            
 
             services.AddControllersWithViews();
         }
