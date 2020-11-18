@@ -18,7 +18,7 @@ namespace HD.Station.Authentication.Controllers
         [Authorize]
         public IActionResult Secret()
         {
-            return View();
+            return View();  
         }
 
         // claim base
